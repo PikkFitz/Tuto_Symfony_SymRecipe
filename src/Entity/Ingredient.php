@@ -2,25 +2,42 @@
 
 namespace App\Entity;
 
+
 use App\Repository\IngredientRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+
+use Symfony\Component\Validator\Constraints as Assert;    // Sert pour la validation des données de notre table
 
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
 class Ingredient
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private ?int $id;
 
-    #[ORM\Column(length: 50)]
-    private ?string $name = null;
+    #[ORM\Column(type: 'string', length: 50)]
+    #[Assert\NotBlank()]               // Utiliser :  use Symfony\Component\Validator\Constraints as Assert;   pour pouvoir utiliser : Assert\...()
+    #[Assert\Length(min: 2, max: 50)]  // Utiliser :  use Symfony\Component\Validator\Constraints as Assert;   pour pouvoir utiliser : Assert\...()
+    private string $name;
 
-    #[ORM\Column]
-    private ?float $price = null;
+    #[ORM\Column(type: 'float')]
+    #[Assert\NotNull()]         // Utiliser :  use Symfony\Component\Validator\Constraints as Assert;   pour pouvoir utiliser : Assert\...()
+    #[Assert\Positive()]       
+    #[Assert\LessThan(200)]    
+    private float $price;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    #[ORM\Column(type: 'datetime_immutable')]
+    #[Assert\NotNull()]         // Utiliser :  use Symfony\Component\Validator\Constraints as Assert;   pour pouvoir utiliser : Assert\...()
+    private ?\DateTimeImmutable $createdAt;
+
+
+    // CONSTRUCTEUR
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();      // On met "\" devant DateTimeImmutable() pour ne pas importer la class (use ...)
+    }
 
     public function getId(): ?int
     {
