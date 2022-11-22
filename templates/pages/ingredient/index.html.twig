@@ -5,15 +5,24 @@
 {% block body %}
 
     <div class="container mt-4">
-    
+
         <h1>Mes ingrédients</h1>
 
         {% if not ingredients.items is same as ([]) %}
-            
+    
             {# total items count #}
             <div class="count">
                 <small>{{ ingredients.getTotalItemCount }} ingrédients disponibles</small>
             </div>
+
+            {# read and display just one flash message type #}
+            {% for message in app.flashes('success') %}          {# sucess = Couleur pour Bootstrap #}
+                <div class="alert alert-success mt-4">          {# alert-sucess = Couleur pour alert Bootstrap #}
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            <a href="{{ path('ingredient.new') }}" class="btn btn-primary mt-4">Ajouter un ingrédient</a>
 
             <table class="table table-hover mt-4">
                 <thead>
@@ -22,6 +31,8 @@
                         <th scope="col">Nom</th>
                         <th scope="col">Prix</th>
                         <th scope="col">Date de création</th>
+                        <th scope="col">Edition</th>
+                        <th scope="col">Suppression</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,8 +42,27 @@
                             <td>{{ ingredient.name }}</td>
                             <td>{{ ingredient.price }}</td>
                             <td>{{ ingredient.createdAt|date("d/m/Y") }}</td>
+                            <td><a href="{{ path('ingredient.edit', { id: ingredient.id }) }}" class="btn btn-info">Modifier</a></td>
+                            <td><a href="{{ path('ingredient.delete', { id: ingredient.id }) }}" class="btn btn-danger" id="id_lien_supprimer_ingredient">Supprimer</a></td>
                         </tr>
+
                     {% endfor %}
+
+                    <script> 
+                    // Script JS de confirmation pour la suppression d'un ingredient
+
+                    let confirmation_supprimer = document.getElementById("id_lien_supprimer_ingredient");
+                    confirmation_supprimer.addEventListener("click", confirmDelete);
+
+                    function confirmDelete(e)
+                    {
+                        if(!confirm('Voulez-vous supprimer cet ingrédient ?')) 
+                        {
+                            e.preventDefault();
+                        }
+                    }
+                    </script>
+                    
                 </tbody>
             </table>
 
