@@ -43,28 +43,42 @@
                             <td>{{ ingredient.price }}</td>
                             <td>{{ ingredient.createdAt|date("d/m/Y") }}</td>
                             <td><a href="{{ path('ingredient.edit', { id: ingredient.id }) }}" class="btn btn-info">Modifier</a></td>
-                            <td><a href="{{ path('ingredient.delete', { id: ingredient.id }) }}" class="btn btn-danger" id="id_lien_supprimer_ingredient">Supprimer</a></td>
+                            <td><a href="{{ path('ingredient.delete', { id: ingredient.id }) }}" class="btn btn-danger supp" id="id_lien_supprimer_ingredient">Supprimer</a></td>
                         </tr>
 
                     {% endfor %}
 
-                    <script> 
-                    // Script JS de confirmation pour la suppression d'un ingredient
-
-                    let confirmation_supprimer = document.getElementById("id_lien_supprimer_ingredient");
-                    confirmation_supprimer.addEventListener("click", confirmDelete);
-
-                    function confirmDelete(e)
-                    {
-                        if(!confirm('Voulez-vous supprimer cet ingrédient ?')) 
-                        {
-                            e.preventDefault();
-                        }
-                    }
-                    </script>
-                    
                 </tbody>
             </table>
+
+
+            {# Script JS de confirmation pour la suppression d'un ingredient (version "classique")
+            <script> 
+            
+                const confirmation_supprimer = document.querySelectorAll(".supp");
+                
+                confirmation_supprimer.forEach(element => {
+                    element.addEventListener("click", confirmDelete)
+                });
+
+                function confirmDelete(e)
+                {
+                    if(!confirm('Voulez-vous supprimer cet ingrédient ?')) 
+                    {
+                        e.preventDefault();
+                    }
+                }
+            </script> #}
+
+
+            {# Liens vers la librairie SweetAlert et le code JS associé à la confirmation de suppression #}
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="js/sweetAlert.js"></script>
+
+
+
+
+
 
             <div class="navigation">
                 {{ knp_pagination_render(ingredients) }}

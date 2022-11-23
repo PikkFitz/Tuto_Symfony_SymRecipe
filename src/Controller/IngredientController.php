@@ -78,7 +78,7 @@ class IngredientController extends AbstractController
         ]);
     }
 
-
+    
     #[Route('/ingredient/edition/{id}', 'ingredient.edit', methods: ['GET', 'POST'])]
     public function edit(
         Ingredient $ingredient,
@@ -99,7 +99,7 @@ class IngredientController extends AbstractController
             $manager->persist($ingredient);
             $manager->flush();
 
-            $this->addFlash    // Nécessite un block "for message" dans new.html.twig pour fonctionner
+            $this->addFlash    // Nécessite un block "for message" dans edit.html.twig pour fonctionner
             (
                 'success',  //Couleur pour Bootstrap
                 'Votre ingrédient a bien été modifié !'
@@ -110,10 +110,12 @@ class IngredientController extends AbstractController
 
             $form = $this->createForm(IngredientType::class, $ingredient);
 
-            return $this->render('pages/ingredient/edit.html.twig', [
-                'form' => $form->createView()
-            ]);
         }
+
+        return $this->render('pages/ingredient/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+
     }
 
 
@@ -125,7 +127,7 @@ class IngredientController extends AbstractController
     {
         if(!$ingredient)
         {
-            $this->addFlash    // Nécessite un block "for message" dans new.html.twig pour fonctionner
+            $this->addFlash    // Nécessite un block "for message" dans index.html.twig pour fonctionner
             (
                 'warning',  //Couleur pour Bootstrap
                 'L\'ingrédient n\'a pas été trouvé !'
@@ -136,7 +138,7 @@ class IngredientController extends AbstractController
         $manager->remove($ingredient);
         $manager->flush();
 
-        $this->addFlash    // Nécessite un block "for message" dans new.html.twig pour fonctionner
+        $this->addFlash    // Nécessite un block "for message" dans index.html.twig pour fonctionner
         (
             'danger',  //Couleur pour Bootstrap
             'Votre ingrédient a bien été supprimé !'
