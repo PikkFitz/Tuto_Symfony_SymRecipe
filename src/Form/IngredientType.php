@@ -53,17 +53,18 @@ class IngredientType extends AbstractType
                     new Assert\Positive(),
                     new Assert\LessThan(200)
                 ]
-
             ])
             ->add('submit', SubmitType::class, 
             [
                 'attr' => 
                 [
-                    'class' => 'btn btn-primary mt-4'
+                    'class' => 'btn btn-primary mt-4 submit'
                 ],
                 'label' => 'Ajouter mon ingrédient'
             ]);
+         
     }
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {

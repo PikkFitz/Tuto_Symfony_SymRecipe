@@ -63,10 +63,10 @@ class IngredientController extends AbstractController
             $manager->persist($ingredient);
             $manager->flush();
 
-            $this->addFlash    // Nécessite un block "for message" dans new.html.twig pour fonctionner
+            $this->addFlash    // Nécessite un block "for message" dans index.html.twig pour fonctionner
             (
-                'success',  //Couleur pour Bootstrap
-                'Votre ingrédient a bien été ajouté !'
+                'success',  // Nom de l'alerte 
+                ['info' => 'Ajout !','bonus' => "L'ingrédient \"" . $ingredient->getName() . "\" a bien été ajouté"]  // Message(s)
             );
 
             return $this->redirectToRoute('app_ingredient');
@@ -99,10 +99,10 @@ class IngredientController extends AbstractController
             $manager->persist($ingredient);
             $manager->flush();
 
-            $this->addFlash    // Nécessite un block "for message" dans edit.html.twig pour fonctionner
+            $this->addFlash    // Nécessite un block "for message" dans index.html.twig pour fonctionner
             (
-                'success',  //Couleur pour Bootstrap
-                'Votre ingrédient a bien été modifié !'
+                'warning',  // Nom de l'alerte 
+                ['info' => 'Modification !','bonus' => "L'ingrédient \"" . $ingredient->getName() . "\" a bien été modifié"]  // Message(s)
             );
 
             return $this->redirectToRoute('app_ingredient');
@@ -130,18 +130,19 @@ class IngredientController extends AbstractController
             $this->addFlash    // Nécessite un block "for message" dans index.html.twig pour fonctionner
             (
                 'warning',  //Couleur pour Bootstrap
-                'L\'ingrédient n\'a pas été trouvé !'
+                ['info' => 'Ingrédient introuvable !','bonus' => "L'ingrédient n'a pas été trouvé..."]  // Message(s)
             );
 
             return $this->redirectToRoute('app_ingredient');
         }
+        
         $manager->remove($ingredient);
         $manager->flush();
 
         $this->addFlash    // Nécessite un block "for message" dans index.html.twig pour fonctionner
         (
-            'danger',  //Couleur pour Bootstrap
-            'Votre ingrédient a bien été supprimé !'
+            'danger',  // Nom de l'alerte 
+            ['info' => 'Suppression !','bonus' => "L'ingrédient \"" . $ingredient->getName() . "\" a bien été supprimé"]  // Message(s)
         );
 
         return $this->redirectToRoute('app_ingredient');

@@ -16,13 +16,29 @@
             </div>
 
             {# read and display just one flash message type #}
-            {% for message in app.flashes('success') %}          {# sucess = Couleur pour Bootstrap #}
-                <div class="alert alert-success mt-4">          {# alert-sucess = Couleur pour alert Bootstrap #}
-                    {{ message }}
+            {% for message in app.flashes('success') %}          {# sucess = Nom de l'alerte  #}
+                <div class="alert alert-success mt-4">           {# alert-sucess = Type d'alerte Bootstrap #}
+                    <h5>{{ message.info }}</h5>
+                    {{message.bonus}}
                 </div>
             {% endfor %}
 
-            <a href="{{ path('ingredient.new') }}" class="btn btn-primary mt-4">Ajouter un ingrédient</a>
+            {% for message in app.flashes('warning') %}          {# warning = Nom de l'alerte  #}
+                <div class="alert alert-warning mt-4">           {# alert-warning = Type d'alerte Bootstrap #}
+                    <h5>{{ message.info }}</h5>
+                    {{message.bonus}}
+                </div>
+            {% endfor %}
+
+            {% for message in app.flashes('danger') %}          {# danger = Nom de l'alerte  #}
+                <div class="alert alert-danger mt-4">           {# alert-danger = Type d'alerte Bootstrap #}
+                    <h5>{{ message.info }}</h5>
+                    {{message.bonus}}
+                </div>
+            {% endfor %}
+
+
+            <a href="{{ path('ingredient.new') }}" class="btn btn-success mt-4">Ajouter un ingrédient</a>
 
             <table class="table table-hover mt-4">
                 <thead>
@@ -73,11 +89,7 @@
 
             {# Liens vers la librairie SweetAlert et le code JS associé à la confirmation de suppression #}
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="js/sweetAlert.js"></script>
-
-
-
-
+            <script src="/js/sweetAlert_Delete.js"></script>
 
 
             <div class="navigation">
