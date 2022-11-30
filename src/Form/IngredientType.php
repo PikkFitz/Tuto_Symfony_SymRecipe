@@ -17,6 +17,7 @@ class IngredientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+        
             ->add('name', TextType::class, 
             [
                 'attr' => 
@@ -35,8 +36,8 @@ class IngredientType extends AbstractType
                     new Assert\Length(['min' => 2, 'max' => 50]),
                     new Assert\NotBlank()
                 ]
-
             ])
+
             ->add('price', MoneyType::class, 
             [
                 'attr' => 
@@ -54,6 +55,7 @@ class IngredientType extends AbstractType
                     new Assert\LessThan(200)
                 ]
             ])
+
             ->add('submit', SubmitType::class, 
             [
                 'attr' => 

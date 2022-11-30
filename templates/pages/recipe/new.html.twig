@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}SymRecipe - Nouvelle recette{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h1 class="mt-4">Création d'une recette</h1>
+
+        {{ form(form) }}
+        
+    </div>
+
+
+    {# Liens vers la librairie SweetAlert et le code JS associé à la confirmation de modification #}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/sweetAlert_Add.js"></script>
+
+{% endblock %}
