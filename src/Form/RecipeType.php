@@ -53,6 +53,7 @@ class RecipeType extends AbstractType
                     'min' => 1,
                     'max' => 1440
                 ],
+                'required' => false,
                 'label' => 'Temps (en minutes)',
                 'label_attr' => 
                 [
@@ -73,6 +74,7 @@ class RecipeType extends AbstractType
                     'min' => 1,
                     'max' => 50
                 ],
+                'required' => false,
                 'label' => 'Nombre de personnes',
                 'label_attr' => 
                 [
@@ -93,6 +95,7 @@ class RecipeType extends AbstractType
                     'min' => 1,
                     'max' => 5
                 ],
+                'required' => false,
                 'label' => 'Difficulté',
                 'label_attr' => 
                 [
@@ -130,6 +133,7 @@ class RecipeType extends AbstractType
                 [
                     'class' => 'form-control'
                 ],
+                'required' => false,
                 'label' => 'Prix',
                 'label_attr' => 
                 [
@@ -146,14 +150,13 @@ class RecipeType extends AbstractType
             [
                 'attr' =>
                 [
-                    'class' => 'form-control',
-                    'min' => 1,
-                    'max' => 5
+                    'class' => 'form-check-input'
                 ],
+                'required' => false,
                 'label' => 'Favoris ?',
                 'label_attr' => 
                 [
-                    'class' => 'form-label mt-4'
+                    'class' => 'form-check-label'
                 ],
                 'constraints' => 
                 [
@@ -171,6 +174,11 @@ class RecipeType extends AbstractType
                 {
                     return $r->createQueryBuilder('i')->orderBy('i.name', 'ASC');
                 },
+                'label' => 'Les ingrédients : ',
+                'label_attr' => 
+                [
+                    'class' => 'form-label mt-4'
+                ],
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true
@@ -194,11 +202,3 @@ class RecipeType extends AbstractType
         ]);
     }
 }
-
-
-// <div class="form-check">
-// <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-// <label class="form-check-label" for="flexCheckDefault">
-//   Default checkbox
-// </label>
-// </div>

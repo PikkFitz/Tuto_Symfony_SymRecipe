@@ -15,6 +15,28 @@
                 <small>{{ recipes.getTotalItemCount }} recettes disponibles</small>
             </div>
 
+            {# read and display just one flash message type #}
+            {% for message in app.flashes('success') %}          {# success = Nom de l'alerte  #}
+                <div class="alert alert-success mt-4">           {# alert-sucess = Type d'alerte Bootstrap #}
+                    <h5>{{ message.info }}</h5>
+                    {{message.bonus}}
+                </div>
+            {% endfor %}
+
+            {% for message in app.flashes('warning') %}          {# warning = Nom de l'alerte  #}
+                <div class="alert alert-warning mt-4">           {# alert-warning = Type d'alerte Bootstrap #}
+                    <h5>{{ message.info }}</h5>
+                    {{message.bonus}}
+                </div>
+            {% endfor %}
+
+            {% for message in app.flashes('danger') %}          {# danger = Nom de l'alerte  #}
+                <div class="alert alert-danger mt-4">           {# alert-danger = Type d'alerte Bootstrap #}
+                    <h5>{{ message.info }}</h5>
+                    {{message.bonus}}
+                </div>
+            {% endfor %}
+
             <a href="{{ path('recipe.new') }}" class="btn btn-success mt-4">Ajouter une recette</a>
 
             <table class="table table-hover mt-4">
@@ -37,8 +59,8 @@
                             <td>{{ (recipe.price is same as(null)) ? 'Non renseigné' : recipe.price }}</td>
                             <td>{{ (recipe.difficulty is same as(null)) ? 'Non renseigné' : recipe.difficulty }}</td>
                             <td>{{ recipe.createdAt|date("d/m/Y") }}</td>
-                            <td>ToDo</td>
-                            <td>ToDo</td>
+                            <td><a href="{{ path('recipe.edit', { id: recipe.id }) }}" class="btn btn-info">Modifier</a></td>
+                            <td><a href="{{ path('recipe.delete', { id: recipe.id }) }}" class="btn btn-danger supp" id="id_lien_supprimer_recette">Supprimer</a></td>
                         </tr>
 
                     {% endfor %}
@@ -68,7 +90,7 @@
 
             {# Liens vers la librairie SweetAlert et le code JS associé à la confirmation de suppression #}
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="/js/sweetAlert_Delete.js"></script>
+            <script src="/js/sweetAlert_DeleteRecipe.js"></script>
 
 
             <div class="navigation">

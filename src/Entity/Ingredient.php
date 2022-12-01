@@ -31,13 +31,13 @@ class Ingredient
 
     #[ORM\Column(type: 'datetime_immutable')]
     #[Assert\NotNull()]         // Utiliser :  use Symfony\Component\Validator\Constraints as Assert;   pour pouvoir utiliser : Assert\...()
-    private ?\DateTimeImmutable $createdAt;
+    private ? DateTimeImmutable $createdAt;
 
 
     // CONSTRUCTEUR
     public function __construct()
     {
-        $this->createdAt = new \DateTimeImmutable();      // On met "\" devant DateTimeImmutable() pour ne pas importer la class (use ...)
+        $this->createdAt = new DateTimeImmutable();      // On met "\" devant DateTimeImmutable() pour ne pas importer la class (use ...)
     }
 
     public function getId(): ?int

@@ -16,7 +16,7 @@
             </div>
 
             {# read and display just one flash message type #}
-            {% for message in app.flashes('success') %}          {# sucess = Nom de l'alerte  #}
+            {% for message in app.flashes('success') %}          {# success = Nom de l'alerte  #}
                 <div class="alert alert-success mt-4">           {# alert-sucess = Type d'alerte Bootstrap #}
                     <h5>{{ message.info }}</h5>
                     {{message.bonus}}
@@ -89,7 +89,7 @@
 
             {# Liens vers la librairie SweetAlert et le code JS associé à la confirmation de suppression #}
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="/js/sweetAlert_Delete.js"></script>
+            <script src="/js/sweetAlert_DeleteIngredient.js"></script>
 
 
             <div class="navigation">

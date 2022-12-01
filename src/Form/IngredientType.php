@@ -64,7 +64,6 @@ class IngredientType extends AbstractType
                 ],
                 'label' => 'Ajouter mon ingrédient'
             ]);
-         
     }
 
 
